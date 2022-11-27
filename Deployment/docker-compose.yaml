@@ -1,0 +1,34 @@
+version: "3.9"
+
+networks:
+  composed-network:
+    name: IotNetwork
+
+services:
+  device:
+    container_name: device
+    build:
+      dockerfile: Device/Mqtt.Device/Dockerfile
+      context: ../src
+    networks: [ composed-network ]
+    environment:
+      MqttClientOptions:Address: broker
+    depends_on: [ broker ]
+  
+  supervisor:
+    container_name: supervisor
+    build:
+      dockerfile: Supervisor/Mqtt.Supervisor/Dockerfile
+      context: ../src
+    networks: [ composed-network ]
+    environment:
+      MqttClientOptions:Address: broker
+    depends_on: [ broker ]
+  
+  broker:
+    container_name: HiveMQ
+    image: "hivemq/hivemq4:4.9.1"
+    networks: [ composed-network ]
+    ports:
+      - "8080:8080"
+      - "1883:1883"
