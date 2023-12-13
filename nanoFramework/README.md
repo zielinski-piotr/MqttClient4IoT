@@ -57,25 +57,30 @@ You need to know the COM Port attached to your device. Search for Computer Manag
 Open MqttClient4IoT.sln from the nanoFramework subfolder.
 
 7. Enable Device Explorer 
+
 ![Open Device Explorer](Resources/DeviceExplorer.png)
 
 Note: If the Device Explorer icons are missing, run this command from the Visual Studio executable folder:
 > .\devenv.exe /updateConfiguration
 
 8. Select your ESP32 device in Device Explorer
-   ![Device Explorer Window](Resources/DeviceExplorerWindow.png)
+
+![Device Explorer Window](Resources/DeviceExplorerWindow.png)
 
 9. Configure the application with your WIFI network, Broker address etc.
 
 There is a `Settings` class that holds all the configuration properties of the sample application. This includes the Broker address, Wifi SSID and password, BMP280 I2C address and others.
+
 ![Settings](Resources/Settings.png)
 
 10. Deploy application to your ESP32
 
 Select the `Clients.Esp32` project in the Solution Explorer end from the context menu select `Deploy` command.
+
 ![Solution Explorer](Resources/SolutionExplorer.png )
 
 If everything is set up correctly, you should be able to see the progress of the deployment in the Output window:
+
 ![Output Window](Resources/OutputWindow.png)
 
 

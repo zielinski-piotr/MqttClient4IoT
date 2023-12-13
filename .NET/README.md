@@ -29,19 +29,32 @@ if (Runtime.RuntimeIdentifier.Contains("linux-arm") || Runtime.RuntimeIdentifier
 I will provide details for each model in separate sections, but there are some common steps that need to be taken to install the operating system on the Raspberry PI devices.
 
 1. Get Raspberry Pi Imager from Raspberry Pi site
-   ![Raspberry Pi Imager](Resources/RaspberryPiImager_01.png)
+   
+![Raspberry Pi Imager](Resources/RaspberryPiImager_01.png)
+
 2. Choose the right device type
-   ![DeviceType](Resources/RaspberryPiImager_02.png)
+   
+![DeviceType](Resources/RaspberryPiImager_02.png)
+
 3. Choose the OS
-   ![OS Type](Resources/RaspberryPiImager_03.png)
+
+![OS Type](Resources/RaspberryPiImager_03.png)
+
 4. Choose the storage
-   ![Storage](Resources/RaspberryPiImager_04.png)
+
+![Storage](Resources/RaspberryPiImager_04.png)
+
 5. Edit Settings to customize the image
-   ![Settings](Resources/RaspberryPiImager_05.png)
+
+![Settings](Resources/RaspberryPiImager_05.png)
+
 6. Setup the Account settings and WIFI (wifi is optional for boards containing ethernet interface)
-   ![Account Settings](Resources/RaspberryPiImager_06.png)
+
+![Account Settings](Resources/RaspberryPiImager_06.png)
+
 7. Enable SSH
-   ![Enable SSH](Resources/RaspberryPiImager_07.png)
+
+![Enable SSH](Resources/RaspberryPiImager_07.png)
 
 I usually choose the Lite version of the OS that comes with the Raspberry Pi, as I'm mostly using it as a remote Linux machine. But you can choose otherwise.
 
@@ -187,6 +200,7 @@ To do this, we need to install i2c tools.
 Then we need to run the tool.
 
 >sudo i2cdetect -y 1
+
 ![i2c sensor address](Resources/bmp280-address.png)
 
 The address of our sensor is 0x76 hexadecimal.
