@@ -1,0 +1,44 @@
+version: "3.9"
+
+networks:
+  composed-network:
+    name: IotNetwork
+
+services:
+  rpi:
+    container_name: Rpi
+    build:
+      dockerfile: Clients/Clients.Rpi/Dockerfile
+      context: ../src
+    networks: [ composed-network ]
+    environment:
+      MqttClientOptions:Address: broker
+    depends_on: [ broker ]
+  
+  rpi-zero:
+    container_name: RpiZero
+    build:
+      dockerfile: Clients/Clients.RpiZero/Dockerfile
+      context: ../src
+    networks: [ composed-network ]
+    environment:
+      MqttClientOptions:Address: broker
+    depends_on: [ broker ]
+    
+  supervisor:
+    container_name: supervisor
+    build:
+      dockerfile: Clients/Clients.Supervisor/Dockerfile
+      context: ../src
+    networks: [ composed-network ]
+    environment:
+      MqttClientOptions:Address: broker
+    depends_on: [ broker ]
+  
+  broker:
+    container_name: HiveMQ
+    image: "hivemq/hivemq4:4.9.1"
+    networks: [ composed-network ]
+    ports:
+      - "8080:8080"
+      - "1883:1883"
