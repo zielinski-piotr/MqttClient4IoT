@@ -3,7 +3,7 @@ using Device.Abstractions;
 
 namespace Device.Mock;
 
-public class LedMock : ILed
+public class LedMock : IFailureLed, ISuccessLed
 {
     public void On()
     {

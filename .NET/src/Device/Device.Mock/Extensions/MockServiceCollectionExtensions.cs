@@ -29,8 +29,8 @@ public static class MockServiceCollectionExtensions
 
     public static IServiceCollection RegisterLedMockDeviceTypes(this IServiceCollection serviceCollection)
     {
-        serviceCollection.AddSingleton<SuccessLed>();
-        serviceCollection.AddSingleton<FailureLed>();
+        serviceCollection.AddSingleton<ISuccessLed, LedMock>();
+        serviceCollection.AddSingleton<IFailureLed, LedMock>();
         
         return serviceCollection;
     }

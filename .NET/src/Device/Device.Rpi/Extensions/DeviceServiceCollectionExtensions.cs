@@ -33,8 +33,8 @@ public static class DeviceServiceCollectionExtensions
     public static IServiceCollection RegisterLedDeviceTypes(this IServiceCollection serviceCollection)
     {
         serviceCollection.AddSingleton<GpioController>();
-        serviceCollection.AddSingleton<SuccessLed>();
-        serviceCollection.AddSingleton<FailureLed>();
+        serviceCollection.AddSingleton<ISuccessLed, SuccessLed>();
+        serviceCollection.AddSingleton<IFailureLed, FailureLed>();
 
         return serviceCollection;
     }

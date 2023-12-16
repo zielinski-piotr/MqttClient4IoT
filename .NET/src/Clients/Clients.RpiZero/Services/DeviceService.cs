@@ -1,5 +1,4 @@
 ﻿using Device.Abstractions;
-using Device.Rpi;
 using Microsoft.Extensions.Logging;
 using Shared.Client;
 using Shared.Contracts;
@@ -15,8 +14,8 @@ public class DeviceService : DeviceServiceBase
 {
     private readonly ITemperatureSensor _temperatureSensor;
     private readonly IPressureSensor _pressureSensor;
-    private readonly SuccessLed _successLed;
-    private readonly FailureLed _failureLed;
+    private readonly ISuccessLed _successLed;
+    private readonly IFailureLed _failureLed;
 
     public DeviceService(
         IMqttClient mqttClient,
@@ -25,8 +24,8 @@ public class DeviceService : DeviceServiceBase
         IMessageResolver messageResolver,
         ITemperatureSensor temperatureSensor,
         IPressureSensor pressureSensor,
-        SuccessLed successLed,
-        FailureLed failureLed,
+        ISuccessLed successLed,
+        IFailureLed failureLed,
         ILogger<DeviceService> logger) : base(
         mqttClient,
         mqttClientOptions,
