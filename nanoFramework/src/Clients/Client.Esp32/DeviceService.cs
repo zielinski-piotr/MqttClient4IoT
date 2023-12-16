@@ -15,6 +15,7 @@ namespace Clients.Esp32
         private readonly ILed _failureLed;
         private readonly Shared.Mqtt.Client.Abstractions.IMqttClient _mqttClient;
         private readonly MqttClientOptions _mqttClientOptions;
+        private bool _shouldReportConnectedStatus = true;
 
         public DeviceService(
             Shared.Mqtt.Client.Abstractions.IMqttClient mqttClient,
@@ -62,10 +63,26 @@ namespace Clients.Esp32
         {
             while (true)
             {
+                ReportConnectionStatus();
                 SendTemperature();
                 Thread.Sleep(1000);
                 SendPressure();
                 Thread.Sleep(5000);
+            }
+        }
+
+        private void ReportConnectionStatus()
+        {
+            if (!_shouldReportConnectedStatus || !_mqttClient.IsConnected) return;
+            
+            try
+            {
+                _mqttClient.Publish(Encoding.UTF8.GetBytes(@"{""Status"": ""Connected""}"), $"Sensor/{_mqttClientOptions.DeviceId}/Status");
+                _shouldReportConnectedStatus = false;
+            }
+            catch
+            {
+                _shouldReportConnectedStatus = true;
             }
         }
 
@@ -115,6 +132,7 @@ namespace Clients.Esp32
         {
             _failureLed.On();
             _successLed.Off();
+            _shouldReportConnectedStatus = true;
         }
 
         private void MessageSent()

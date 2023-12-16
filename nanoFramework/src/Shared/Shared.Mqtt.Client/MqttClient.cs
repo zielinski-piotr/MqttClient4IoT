@@ -111,8 +111,6 @@ namespace Shared.Mqtt.Client
                         keepAlivePeriod: 60);
 
                     Debug.WriteLine($"Client connection result: '{result}'");
-
-                    if(result == MqttReasonCode.Success) Publish(Encoding.UTF8.GetBytes(@"{""Status"": ""Connected""}"), $"Sensor/{_mqttClientOptions.DeviceId}/Status");
                 }
                 catch (Exception e)
                 {
